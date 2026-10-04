@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import BottomNav from '@/components/BottomNav';
 import { supabase } from '@/lib/supabase';
-import { MONTHS, getCurrentMonthKey, getMonthLabel } from '@/lib/constants';
+import { MONTHS, getMonthLabel } from '@/lib/constants';
 import { fmt$ } from '@/lib/calculations';
 import type { Category, Expense } from '@/types';
 import { Trash2 } from 'lucide-react';
