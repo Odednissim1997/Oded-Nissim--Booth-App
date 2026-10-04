@@ -40,7 +40,7 @@ function SettingsPanel() {
   // All months (default + custom from DB)
   const defaultMonthKeys = MONTHS.map((m) => m.key);
   const customSplits = splits.filter((s) => !defaultMonthKeys.includes(s.month_key));
-  const allMonthKeys = [...new Set([...defaultMonthKeys, ...splits.map((s) => s.month_key)])].sort();
+  const allMonthKeys = Array.from(new Set([...defaultMonthKeys, ...splits.map((s) => s.month_key)])).sort();
 
   const formatMonthLabel = (key: string) => {
     const found = MONTHS.find((m) => m.key === key);
