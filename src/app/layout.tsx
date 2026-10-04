@@ -4,14 +4,21 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
 export const metadata: Metadata = {
-  title: 'Budget App – Oded & Tomer',
-  description: 'Shared apartment budget tracker',
+  title: 'Chicago Budget',
+  description: 'Shared apartment budget tracker for Oded & Tomer',
   viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Budget',
+  },
+  themeColor: '#0a1628',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="he" dir="rtl" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

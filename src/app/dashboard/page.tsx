@@ -156,7 +156,7 @@ function Dashboard() {
                   className="rounded-xl p-3 bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700"
                 >
                   <p className="text-xs text-gray-500 dark:text-gray-400 capitalize font-medium mb-1">
-                    {t.user === 'oded' ? '🧑 Oded' : '👤 Tomer'}
+                    {t.user === 'oded' ? '👨 Oded' : '👩 Tomer'}
                   </p>
                   <p className="text-xs text-gray-400">Actual</p>
                   <p className="font-bold text-gray-800 dark:text-gray-100 text-base">{fmt$(t.actual_usd)}</p>

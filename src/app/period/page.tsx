@@ -194,7 +194,7 @@ function Period() {
               {userTotals.map((t) => (
                 <div key={t.user} className="rounded-xl p-3 bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
                   <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">
-                    {t.user === 'oded' ? '🧑 Oded' : '👤 Tomer'}
+                    {t.user === 'oded' ? '👨 Oded' : '👩 Tomer'}
                   </p>
                   <div className="space-y-1.5">
                     <div className="flex justify-between text-xs">
