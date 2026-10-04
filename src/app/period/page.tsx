@@ -236,7 +236,7 @@ function Period() {
                     <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `$${v}`} />
                     <Tooltip
                       contentStyle={tooltipStyle}
-                      formatter={(value: number) => [`$${value}`, undefined]}
+                      formatter={(value) => [`$${value}`, undefined]}
                     />
                     <Legend wrapperStyle={{ fontSize: 12 }} />
                     <Bar dataKey="Budget" fill="#93c5fd" radius={[3, 3, 0, 0]} />
@@ -257,7 +257,7 @@ function Period() {
                     <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `$${v}`} />
                     <Tooltip
                       contentStyle={tooltipStyle}
-                      formatter={(value: number) => [`$${value}`, undefined]}
+                      formatter={(value) => [`$${value}`, undefined]}
                     />
                     <Legend wrapperStyle={{ fontSize: 12 }} />
                     <Bar dataKey="Oded" fill="#a78bfa" radius={[3, 3, 0, 0]} />
