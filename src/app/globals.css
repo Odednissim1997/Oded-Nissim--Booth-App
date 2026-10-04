@@ -1,31 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 100%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --radius: 0.5rem;
-  }
-
-  body {
-    @apply bg-gray-50 text-gray-900;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
-
-  input, textarea, select {
-    @apply outline-none;
-  }
+:root {
+  --background: 249 250 251;
+  --foreground: 17 24 39;
 }
 
-@layer utilities {
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+.dark {
+  --background: 17 24 39;
+  --foreground: 249 250 251;
+}
+
+html {
+  font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+  direction: rtl;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Safe area for bottom nav */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+}
+
+/* Remove transitions from animated elements */
+.animate-spin,
+[class*='animate-'] {
+  transition: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 9999px;
+}
+
+/* Number inputs no spinners */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
