@@ -133,7 +133,7 @@ function SettingsPanel() {
   };
 
   const handleDeleteCategory = async (id: string) => {
-    if (!confirm('למחוק קטגוריה זו? כל ההוצאות הקשורות אליה יימחקו גם.')) return;
+    if (!confirm('Delete this category? All related expenses will also be deleted.')) return;
     await supabase.from('categories').delete().eq('id', id);
     setCategories((prev) => prev.filter((c) => c.id !== id));
   };
@@ -160,14 +160,14 @@ function SettingsPanel() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-24">
       <header className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 z-40 px-4 py-3 flex items-center justify-between">
-        <h1 className="font-bold text-gray-800 dark:text-gray-100">הגדרות</h1>
+        <h1 className="font-bold text-gray-800 dark:text-gray-100">Settings</h1>
         <button
           onClick={handleSave}
           disabled={saving || loading}
           className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition-colors"
         >
           <Save className="w-4 h-4" />
-          {saving ? 'שומר...' : saved ? 'נשמר ✓' : 'שמור הכל'}
+          {saving ? 'Saving...' : saved ? 'Saved ✓' : 'Save All'}
         </button>
       </header>
 
@@ -180,7 +180,7 @@ function SettingsPanel() {
 
           {/* Exchange Rate */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">שער חליפין</h2>
+            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">Exchange Rate</h2>
             <div className="flex items-center gap-2">
               <label className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">1 USD =</label>
               <input
@@ -197,7 +197,7 @@ function SettingsPanel() {
 
           {/* Monthly Splits */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">חלוקת עלויות לפי חודש</h2>
+            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">Cost Split by Month</h2>
             <div className="space-y-3">
               {allMonthKeys.map((mk) => {
                 const s = splits.find((sp) => sp.month_key === mk);
@@ -224,7 +224,7 @@ function SettingsPanel() {
 
             {/* Add month */}
             <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">הוסף חודש (YYYY-MM)</p>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Add month (YYYY-MM)</p>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -253,7 +253,7 @@ function SettingsPanel() {
 
           {/* Monthly Fixed Budgets */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">תקציב חודשי ($)</h2>
+            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">Monthly Budgets ($)</h2>
             <div className="space-y-3">
               {sharedFixedCats.map((cat) => (
                 <div key={cat.id} className="flex items-center gap-3">
@@ -286,7 +286,7 @@ function SettingsPanel() {
 
           {/* One-Time Budgets */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">תקציב הוצאות חד פעמיות ($)</h2>
+            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">One-time Budgets ($)</h2>
             <div className="space-y-3">
               {oneTimeCats.map((cat) => {
                 const otb = oneTimeBudgets.find((b) => b.category_id === cat.id && b.month_key === cat.one_time_month_key);
@@ -316,11 +316,11 @@ function SettingsPanel() {
 
           {/* Add Category */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">הוסף קטגוריה חדשה</h2>
+            <h2 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">Add New Category</h2>
             <div className="space-y-3">
               <input
                 type="text"
-                placeholder="שם הקטגוריה"
+                placeholder="Category name"
                 value={newCatName}
                 onChange={(e) => setNewCatName(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -331,9 +331,9 @@ function SettingsPanel() {
                   onChange={(e) => setNewCatType(e.target.value as 'shared_fixed' | 'personal' | 'one_time')}
                   className="flex-1 px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm"
                 >
-                  <option value="shared_fixed">משותף חודשי</option>
-                  <option value="personal">אישי</option>
-                  <option value="one_time">חד פעמי</option>
+                  <option value="shared_fixed">Shared Monthly</option>
+                  <option value="personal">Personal</option>
+                  <option value="one_time">One-time</option>
                 </select>
                 {newCatType === 'personal' && (
                   <select
@@ -350,7 +350,7 @@ function SettingsPanel() {
                 {newCatType !== 'one_time' && (
                   <input
                     type="number"
-                    placeholder="תקציב חודשי $"
+                    placeholder="Monthly budget $"
                     value={newCatBudget}
                     onChange={(e) => setNewCatBudget(e.target.value)}
                     className="flex-1 px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm"
@@ -363,14 +363,14 @@ function SettingsPanel() {
                       onChange={(e) => setNewCatMonth(e.target.value)}
                       className="flex-1 px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm"
                     >
-                      <option value="">בחר חודש</option>
+                      <option value="">Select month</option>
                       {allMonthKeys.map((mk) => (
                         <option key={mk} value={mk}>{formatMonthLabel(mk)}</option>
                       ))}
                     </select>
                     <input
                       type="number"
-                      placeholder="תקציב $"
+                      placeholder="Budget $"
                       value={newCatBudget}
                       onChange={(e) => setNewCatBudget(e.target.value)}
                       className="w-28 px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm"
@@ -383,14 +383,14 @@ function SettingsPanel() {
                   className="px-3 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white text-sm rounded-lg flex items-center gap-1"
                 >
                   <Plus className="w-4 h-4" />
-                  הוסף
+                  Add
                 </button>
               </div>
             </div>
 
             {/* Category list with delete */}
             <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 space-y-2">
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">קטגוריות קיימות</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Existing categories</p>
               {categories.map((cat) => (
                 <div key={cat.id} className="flex items-center justify-between">
                   <div>

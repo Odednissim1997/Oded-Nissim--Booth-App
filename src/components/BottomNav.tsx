@@ -7,7 +7,7 @@ const tabs = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/expenses/add', label: 'Add', icon: PlusCircle },
   { href: '/expenses', label: 'History', icon: History },
-  { href: '/period', label: 'תקופה', icon: CalendarRange },
+  { href: '/period', label: 'Period', icon: CalendarRange },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 

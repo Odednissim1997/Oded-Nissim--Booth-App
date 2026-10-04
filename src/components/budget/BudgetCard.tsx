@@ -21,10 +21,10 @@ export default function BudgetCard({ summary, rate }: BudgetCardProps) {
 
   const badge =
     category.type === 'personal'
-      ? `אישי (${category.owner === 'oded' ? 'Oded' : 'Tomer'})`
+      ? `Personal (${category.owner === 'oded' ? 'Oded' : 'Tomer'})`
       : category.type === 'one_time'
-        ? 'חד פעמי'
-        : 'משותף';
+        ? 'One-time'
+        : 'Shared';
 
   const badgeColor =
     pct_used > 100
@@ -51,17 +51,17 @@ export default function BudgetCard({ summary, rate }: BudgetCardProps) {
 
       <div className="mt-3 grid grid-cols-3 gap-1 text-center text-xs">
         <div>
-          <p className="text-gray-500 dark:text-gray-400">תקציב</p>
+          <p className="text-gray-500 dark:text-gray-400">Budget</p>
           <p className="font-medium text-gray-800 dark:text-gray-100">{fmt$(budget_usd)}</p>
           <p className="text-gray-400 dark:text-gray-500">{fmtILS(budget_usd * rate)}</p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">בפועל</p>
+          <p className="text-gray-500 dark:text-gray-400">Actual</p>
           <p className="font-medium text-gray-800 dark:text-gray-100">{fmt$(actual_usd)}</p>
           <p className="text-gray-400 dark:text-gray-500">{fmtILS(actual_usd * rate)}</p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">נותר</p>
+          <p className="text-gray-500 dark:text-gray-400">Remaining</p>
           <p className={`font-medium ${remaining_usd < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-100'}`}>
             {fmt$(remaining_usd)}
           </p>

@@ -17,11 +17,10 @@ export default function AddExpensePage() {
   );
 }
 
-// Maps category type to Hebrew group label
 function getGroupLabel(type: string): string {
-  if (type === 'one_time') return 'חד פעמי';
-  if (type === 'personal') return 'ביטוח בריאות';
-  return 'שוטפות וקבועות';
+  if (type === 'one_time') return 'One-time';
+  if (type === 'personal') return 'Health Insurance';
+  return 'Regular & Fixed';
 }
 
 function AddExpense() {
@@ -53,23 +52,23 @@ function AddExpense() {
   // Group categories
   const groups: { label: string; cats: Category[] }[] = [
     {
-      label: 'שוטפות',
+      label: 'Regular',
       cats: visibleCategories.filter(
-        (c) => c.type === 'shared_fixed' && ['Groceries', 'Leisure (restaurants + shopping)'].some(n => c.name.includes(n.split(' ')[0]))
+        (c) => c.type === 'shared_fixed' && ['Groceries', 'Leisure'].some(n => c.name.includes(n))
       ),
     },
     {
-      label: 'קבועות',
+      label: 'Fixed',
       cats: visibleCategories.filter(
-        (c) => c.type === 'shared_fixed' && !['Groceries', 'Leisure (restaurants + shopping)'].some(n => c.name.includes(n.split(' ')[0]))
+        (c) => c.type === 'shared_fixed' && !['Groceries', 'Leisure'].some(n => c.name.includes(n))
       ),
     },
     {
-      label: 'ביטוח בריאות',
+      label: 'Health Insurance',
       cats: visibleCategories.filter((c) => c.type === 'personal'),
     },
     {
-      label: 'חד פעמי',
+      label: 'One-time',
       cats: visibleCategories.filter((c) => c.type === 'one_time'),
     },
   ].filter((g) => g.cats.length > 0);
@@ -103,8 +102,8 @@ function AddExpense() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pb-24">
         <div className="text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-3" />
-          <p className="font-semibold text-gray-800 dark:text-gray-100">ההוצאה נוספה!</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">חוזר לדשבורד...</p>
+          <p className="font-semibold text-gray-800 dark:text-gray-100">Expense added!</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Returning to dashboard...</p>
         </div>
         <BottomNav />
       </div>
@@ -114,14 +113,14 @@ function AddExpense() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-24">
       <header className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 z-40 px-4 py-3">
-        <h1 className="font-bold text-gray-800 dark:text-gray-100 text-center">הוסף הוצאה</h1>
+        <h1 className="font-bold text-gray-800 dark:text-gray-100 text-center">Add Expense</h1>
       </header>
 
       <main className="max-w-lg mx-auto px-4 py-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Month */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">חודש</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Month</label>
             <select
               value={monthKey}
               onChange={(e) => { setMonthKey(e.target.value); setCategoryId(''); }}
@@ -135,14 +134,14 @@ function AddExpense() {
 
           {/* Category - grouped */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">קטגוריה</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
               required
               className="w-full px-3 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">בחר קטגוריה...</option>
+              <option value="">Select category...</option>
               {groups.map((group) => (
                 <optgroup key={group.label} label={group.label}>
                   {group.cats.map((cat) => (
@@ -157,7 +156,7 @@ function AddExpense() {
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">סכום (USD $)</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Amount (USD)</label>
             <div className="relative">
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-medium">$</span>
               <input
@@ -175,12 +174,12 @@ function AddExpense() {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">תיאור (אופציונלי)</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description (optional)</label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder='למשל: קניות שבועיות'
+              placeholder='e.g. Weekly groceries'
               className="w-full px-3 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -192,7 +191,7 @@ function AddExpense() {
             disabled={submitting}
             className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold rounded-lg transition-colors"
           >
-            {submitting ? 'מוסיף...' : 'הוסף הוצאה'}
+            {submitting ? 'Adding...' : 'Add Expense'}
           </button>
         </form>
       </main>

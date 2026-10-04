@@ -158,9 +158,11 @@ function Dashboard() {
                   <p className="text-xs text-gray-500 dark:text-gray-400 capitalize font-medium mb-1">
                     {t.user === 'oded' ? '🧑 Oded' : '👤 Tomer'}
                   </p>
+                  <p className="text-xs text-gray-400">Actual</p>
                   <p className="font-bold text-gray-800 dark:text-gray-100 text-base">{fmt$(t.actual_usd)}</p>
                   <p className="text-xs text-gray-500">{fmtILS(t.actual_ils)}</p>
-                  <p className="text-xs text-gray-400 mt-1">Budget: {fmt$(t.budget_usd)}</p>
+                  <p className="text-xs text-gray-400 mt-1">Budget</p>
+                  <p className="text-xs font-medium text-gray-700 dark:text-gray-300">{fmt$(t.budget_usd)}</p>
                   <p className="text-xs text-gray-400">{fmtILS(t.budget_ils)}</p>
                 </div>
               ))}
