@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, PlusCircle, History, Settings } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, History, CalendarRange, Settings } from 'lucide-react';
 
 const tabs = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/expenses/add', label: 'Add', icon: PlusCircle },
   { href: '/expenses', label: 'History', icon: History },
+  { href: '/period', label: 'תקופה', icon: CalendarRange },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
