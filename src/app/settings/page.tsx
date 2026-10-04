@@ -47,7 +47,11 @@ function SettingsPanel() {
         .from('settings')
         .upsert({ id: 1, usd_to_ils: settings.usd_to_ils, updated_at: new Date().toISOString() }),
       ...splits.map((s) =>
-        supabase.from('month_splits').upsert({ month_key: s.month_key, oded_pct: s.oded_pct }),
+        supabase.from('month_splits').upsert({
+          month_key: s.month_key,
+          oded_pct: s.oded_pct,
+          tomer_pct: 1 - s.oded_pct,
+        }),
       ),
       ...oneTimeBudgets.map((b) =>
         supabase.from('one_time_budgets').upsert({
