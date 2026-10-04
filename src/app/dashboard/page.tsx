@@ -161,6 +161,7 @@ function Dashboard() {
                   <p className="font-bold text-gray-800 dark:text-gray-100 text-base">{fmt$(t.actual_usd)}</p>
                   <p className="text-xs text-gray-500">{fmtILS(t.actual_ils)}</p>
                   <p className="text-xs text-gray-400 mt-1">Budget: {fmt$(t.budget_usd)}</p>
+                  <p className="text-xs text-gray-400">{fmtILS(t.budget_ils)}</p>
                 </div>
               ))}
             </div>
